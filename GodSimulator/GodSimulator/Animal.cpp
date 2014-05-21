@@ -1,5 +1,10 @@
 #include"Animal.h"
 
+Animal::Animal()
+{
+
+
+}
 void Animal::Attack(const Entity& entity)
 {
 

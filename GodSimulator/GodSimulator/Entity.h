@@ -2,6 +2,8 @@
 #include"Point3D.h"
 using namespace std;
 
+#pragma once 
+
 class Entity
 {
 public:
