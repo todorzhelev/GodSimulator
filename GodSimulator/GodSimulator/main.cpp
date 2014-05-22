@@ -1,23 +1,13 @@
 #include<iostream>
-#include"Entity.h"
-#include"Animal.h"
-#include"RandomGenerator.h"
+#include"Game.h"
+
 
 int main()
 {
-	RandomGenerator gen;
-	srand(time(NULL));
+	Game* game = new Game;
 
-	for( int i = 0; i < 10; i++)
-	{
-		cout << gen.GenerateRandomNumber(1000,true) << endl;
-	}
-
-	Entity* pEnt = new Entity("pesho",80,1,Point3D(1,1,1));
-
-	pEnt->Move(Point3D(10,15,-3));
-
-	Animal* anim = new Animal();
+	game->Run();
+	
 
 	system("pause");
 	return 0;

@@ -1,4 +1,5 @@
 #include<string>
+#include<iostream>
 #include"Point3D.h"
 using namespace std;
 

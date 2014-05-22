@@ -1,5 +1,10 @@
 #include"RandomGenerator.h"
 
+RandomGenerator::RandomGenerator()
+{
+	int a = 5;
+
+}
 
 string RandomGenerator::GenerateRandomString(int nLength)
 {
