@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	rgen = new RandomGenerator;
+	m_pScene = new Scene;
 
 	pPlayer = new God;
 }
@@ -13,8 +13,29 @@ void Game::Run()
 
 	int b = 0;
 
+	Physics* pPhysics = new Physics;
+
 	string name;
 	cin >> name;
 
 	pPlayer->SetName(name);
+
+	Planet* planet = new Planet;
+
+	m_pScene->GetPlanets().push_back(planet);
+
+	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,100);
+
+	for( auto& i :planet->m_vEntities )
+	{
+		for( auto& j: planet->m_vEntities )
+		{
+			if( i!= j && pPhysics->IsClose(*i,*j))
+			{
+				cout << "they are close!!" << endl;
+			}
+		}
+
+	}
+	int a = 10;
 }

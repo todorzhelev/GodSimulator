@@ -3,9 +3,14 @@
 Entity::Entity()
 {
 	m_strName = "asdf";
-	m_fEnergy = 10;
+	m_fEnergy = RandomGenerator::GetRGen()->GenerateRandomNumber(100);
 	m_nLevel = 0;
-	m_Position = Point3D(0,0,0);
+
+	double x = RandomGenerator::GetRGen()->GenerateRandomNumber(10000);
+	double y = RandomGenerator::GetRGen()->GenerateRandomNumber(10000);
+	double z = RandomGenerator::GetRGen()->GenerateRandomNumber(10000);
+
+	m_Position = Point3D(x,y,z);
 
 	CalculateSize();
 	CalculateMass();
@@ -51,7 +56,7 @@ void Entity::SetLevel(double level)
 	m_nLevel = level;
 }
 
-Point3D Entity::GetPosition()
+Point3D Entity::GetPosition() const
 {
 	return m_Position;
 }

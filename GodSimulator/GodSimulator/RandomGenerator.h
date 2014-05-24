@@ -14,6 +14,12 @@ public:
 
 	string GenerateRandomString(int nLength);
 
-	double GenerateRandomNumber(int nUpperRange, bool bCanBeNegative);
+	double GenerateRandomNumber(int nUpperRange);
 
+	static RandomGenerator* GetRGen();
+
+private:
+
+	static RandomGenerator* rger;
 };
+

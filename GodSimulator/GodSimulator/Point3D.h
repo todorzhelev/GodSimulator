@@ -1,3 +1,4 @@
+#include<cmath>
 #pragma once
 
 class Point3D
@@ -8,14 +9,16 @@ public:
 	Point3D();
 	Point3D(double x, double y, double z);
 
-	double GetX();
+	double GetX() const;
 	void SetX(double x);
 
-	double GetY();
+	double GetY() const;
 	void SetY(double y);
 
-	double GetZ();
+	double GetZ() const;
 	void SetZ(double z);
+
+	double GetDistance(const Point3D& point1);
 
 
 private:

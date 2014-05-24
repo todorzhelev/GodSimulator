@@ -16,9 +16,11 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="God.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Point3D.h" />
     <ClInclude Include="RandomGenerator.h" />
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal.cpp" />
@@ -27,9 +29,11 @@
     <ClCompile Include="God.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Point3D.cpp" />
     <ClCompile Include="RandomGenerator.cpp" />
+    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A45BB60B-1AC6-46EE-9962-3DF770C7805B}</ProjectGuid>

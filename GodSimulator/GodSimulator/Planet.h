@@ -5,9 +5,11 @@
 
 class Planet
 {
+public:
+	Planet();
 
 public:
 
-	std::vector<Entity> m_vEntities;
+	std::vector<Entity*> m_vEntities;
 
 };

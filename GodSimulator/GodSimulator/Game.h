@@ -2,6 +2,9 @@
 #include"Animal.h"
 #include"RandomGenerator.h"
 #include"God.h"
+#include"Scene.h"
+#include"Planet.h"
+#include"Physics.h"
 
 #pragma once
 
@@ -16,7 +19,7 @@ public:
 
 private:
 
-	RandomGenerator* rgen;
-
 	God* pPlayer;
+
+	Scene* m_pScene;
 };

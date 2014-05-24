@@ -1,9 +1,18 @@
 #include<string>
 #include<iostream>
 #include"Point3D.h"
+#include"RandomGenerator.h"
 using namespace std;
 
 #pragma once 
+
+enum EntityType
+{
+	BasicEntity,
+	AnimalType,
+	HumanType,
+	GodType
+};
 
 class Entity
 {
@@ -21,7 +30,7 @@ public:
 	double GetLevel();
 	void SetLevel(double level);
 
-	Point3D GetPosition();
+	Point3D GetPosition() const;
 	void SetPosition(Point3D position);
 
 	double GetSize();
