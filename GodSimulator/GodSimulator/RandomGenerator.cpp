@@ -52,6 +52,18 @@ double RandomGenerator::GenerateRandomNumber(int nUpperRange)
 	return (double)nNumber;
 }
 
+double RandomGenerator::GenerateRandomSignedNumber(int nUpperRange)
+{
+	int nNumber = rand() % nUpperRange;
+
+	if( nNumber % 2 == 0 )
+	{
+		nNumber = -nNumber;
+	}
+	
+	return (double)nNumber;
+}
+
 int RandomGenerator::GenerateRandomNumberInRange(int nLowerRange, int nUpperRange)
 {
 	int nNumber = rand() % (nUpperRange-nLowerRange);

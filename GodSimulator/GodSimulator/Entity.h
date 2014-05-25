@@ -2,6 +2,7 @@
 #include<iostream>
 #include"Point3D.h"
 #include"RandomGenerator.h"
+#include<memory>
 using namespace std;
 
 #pragma once 

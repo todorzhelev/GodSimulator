@@ -2,6 +2,8 @@
 
 Game::Game()
 {
+	srand(time(NULL));
+
 	m_pScene = new Scene;
 
 	pPlayer = new God;
@@ -9,16 +11,7 @@ Game::Game()
 
 void Game::Run()
 {
-	srand(time(NULL));
-
-	int b = 0;
-
 	Physics* pPhysics = new Physics;
-
-	string name;
-	cin >> name;
-
-	pPlayer->SetName(name);
 
 	Planet* planet = new Planet;
 
@@ -27,6 +20,10 @@ void Game::Run()
 	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,200);
 
 	map<string,string> closeEntities;
+
+	cout << "Hello, God " << pPlayer->GetName() << endl  << "Your name is already chosen for you and a planet created for you, with entities on it" << endl;
+
+	pPlayer->DestroyEntirePopulation(*planet);
 
 	while(true)
 	{

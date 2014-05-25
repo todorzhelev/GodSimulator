@@ -9,9 +9,9 @@ bool Physics::IsClose(const Entity& ent1,const Entity& ent2)
 
 void Physics::MoveEntity(Entity& ent)
 {
-	double dx = RandomGenerator::GetRGen()->GenerateRandomNumber(10);
-	double dy = RandomGenerator::GetRGen()->GenerateRandomNumber(10);
-	double dz = RandomGenerator::GetRGen()->GenerateRandomNumber(10);
+	double dx = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(10);
+	double dy = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(10);
+	double dz = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(10);
 
 	ent.Move(Point3D(dx,dy,dz));
 }

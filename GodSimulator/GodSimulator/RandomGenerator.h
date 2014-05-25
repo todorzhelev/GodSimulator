@@ -14,6 +14,8 @@ public:
 
 	string GenerateRandomString(int nLength);
 
+	double GenerateRandomSignedNumber(int nUpperRange);
+
 	double GenerateRandomNumber(int nUpperRange);
 
 	int GenerateRandomNumberInRange(int nLowerRange, int nUpperRange);

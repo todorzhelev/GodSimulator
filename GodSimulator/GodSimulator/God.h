@@ -7,7 +7,7 @@ class God : public Human
 {
 public:
 
-	void DestroyEntirePopulation(const Planet& planet);
+	void DestroyEntirePopulation(Planet& planet);
 	void BindEntitiesToNewPlanet(const Planet& oldPlanet,const Planet& newPlanet);
 
 	void InitPopulation(Planet& planet, EntityType type, int amount);
