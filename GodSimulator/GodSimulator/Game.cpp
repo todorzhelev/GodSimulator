@@ -24,18 +24,30 @@ void Game::Run()
 
 	m_pScene->GetPlanets().push_back(planet);
 
-	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,100);
+	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,200);
 
-	for( auto& i :planet->m_vEntities )
+	map<string,string> closeEntities;
+
+	while(true)
 	{
-		for( auto& j: planet->m_vEntities )
+		for( auto& k :planet->m_vEntities )
 		{
-			if( i!= j && pPhysics->IsClose(*i,*j))
-			{
-				cout << "they are close!!" << endl;
-			}
+			pPhysics->MoveEntity(*k);
 		}
 
+		for( auto& i :planet->m_vEntities )
+		{
+			for( auto& j: planet->m_vEntities )
+			{
+				if( i!= j && pPhysics->IsClose(*i,*j) && closeEntities[i->GetName()].empty())
+				{
+					closeEntities[i->GetName()] = j->GetName();
+					cout << i->GetName() << " and " << j->GetName() << " are close" << endl;
+				}
+			}
+
+		}
 	}
+	
 	int a = 10;
 }

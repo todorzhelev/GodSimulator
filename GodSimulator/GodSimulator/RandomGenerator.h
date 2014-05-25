@@ -16,6 +16,10 @@ public:
 
 	double GenerateRandomNumber(int nUpperRange);
 
+	int GenerateRandomNumberInRange(int nLowerRange, int nUpperRange);
+
+	char GenerateRandomChar(bool bIsCapital);
+
 	static RandomGenerator* GetRGen();
 
 private:

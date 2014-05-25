@@ -2,7 +2,10 @@
 
 Entity::Entity()
 {
-	m_strName = "asdf";
+	int nNameLenght = RandomGenerator::GetRGen()->GenerateRandomNumberInRange(4,8);
+
+	m_strName = RandomGenerator::GetRGen()->GenerateRandomString(nNameLenght);
+
 	m_fEnergy = RandomGenerator::GetRGen()->GenerateRandomNumber(100);
 	m_nLevel = 0;
 
