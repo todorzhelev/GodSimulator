@@ -7,6 +7,8 @@ Game::Game()
 	m_pScene = new Scene;
 
 	pPlayer = new God;
+
+	m_pCommandManager = new CommandManager(pPlayer,m_pScene);
 }
 
 void Game::Run()
@@ -17,17 +19,20 @@ void Game::Run()
 
 	m_pScene->GetPlanets().push_back(planet);
 
-	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,200);
+	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,5000);
 
 	map<string,string> closeEntities;
 
 	cout << "Hello, God " << pPlayer->GetName() << endl  << "Your name is already chosen for you and a planet created for you, with entities on it" << endl;
 
-	pPlayer->DestroyEntirePopulation(*planet);
+	
 
 	while(true)
 	{
-		for( auto& k :planet->m_vEntities )
+		GetCommand();
+		
+
+	/*	for( auto& k :planet->m_vEntities )
 		{
 			pPhysics->MoveEntity(*k);
 		}
@@ -43,8 +48,26 @@ void Game::Run()
 				}
 			}
 
-		}
+		}*/
 	}
-	
-	int a = 10;
+}
+
+void Game::GetCommand()
+{
+	static bool bShouldShow = true;
+	if( bShouldShow )
+	{
+		bShouldShow = false;
+		cout << "You can choose on of the following options:" << endl;
+		cout << "Type \" destroy population\" to destroy planet's population" << endl;
+
+		string command;
+		getline(cin,command);
+
+		vector<string> commands = m_pCommandManager->ParseCommand(command);
+		
+		m_pCommandManager->ExecuteCommand(commands);
+
+		bShouldShow = true;
+	}
 }

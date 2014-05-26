@@ -5,6 +5,7 @@
 #include"Scene.h"
 #include"Planet.h"
 #include"Physics.h"
+#include"CommandManager.h"
 #include<map>
 
 #pragma once
@@ -16,6 +17,8 @@ public:
 
 	Game();
 
+	void GetCommand();
+
 	void Run();
 
 private:
@@ -23,4 +26,6 @@ private:
 	God* pPlayer;
 
 	Scene* m_pScene;
+
+	CommandManager* m_pCommandManager;
 };

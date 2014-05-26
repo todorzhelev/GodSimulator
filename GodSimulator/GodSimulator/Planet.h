@@ -3,10 +3,11 @@
 
 #pragma once
 
-class Planet
+class Planet: public Entity
 {
 public:
 	Planet();
+
 
 public:
 
