@@ -90,12 +90,9 @@ void Game::ParallelCode()
 {
 	for( auto& i: m_pScene->GetPlanets() )
 	{
-		if( !i->m_vEntities.empty() )
+		for( auto& k :i->m_vEntities )
 		{
-			for( auto& k :i->m_vEntities )
-			{
-
-			}
+			m_pPhysics->MoveEntity(*k);
 		}
 	}
 }
