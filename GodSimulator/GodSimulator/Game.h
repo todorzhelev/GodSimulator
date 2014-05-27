@@ -7,6 +7,7 @@
 #include"Physics.h"
 #include"CommandManager.h"
 #include<map>
+#include<mutex>
 
 #pragma once
 
@@ -21,11 +22,22 @@ public:
 
 	void Run();
 
+	void ParallelCode();
+
 private:
+
+	std::mutex mutex;
+
+	Physics* m_pPhysics;
 
 	God* pPlayer;
 
 	Scene* m_pScene;
 
 	CommandManager* m_pCommandManager;
+
+	//function<void(string)> ExecuteCommandFunctor;
+
+	bool m_bShouldExecuteCommand;
+
 };
