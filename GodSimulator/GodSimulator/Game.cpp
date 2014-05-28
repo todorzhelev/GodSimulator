@@ -20,13 +20,11 @@ void Game::Run()
 
 	m_pScene->GetPlanets().push_back(planet);
 
-	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,5000);
+	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,200);
 
 	map<string,string> closeEntities;
 
 	cout << "Hello, God " << pPlayer->GetName() << endl;
-
-	using namespace std::placeholders;
 
 	//the thread will be immediately started after next line
 	std::thread ParallelThread(&Game::GetCommand,this);
@@ -40,20 +38,6 @@ void Game::Run()
 			m_pCommandManager->ExecuteCommand(m_pCommandManager->GetLastCommand());
 			m_bShouldExecuteCommand = false;
 		}
-
-	/*	
-		for( auto& i :planet->m_vEntities )
-		{
-			for( auto& j: planet->m_vEntities )
-			{
-				if( i!= j && pPhysics->IsClose(*i,*j) && closeEntities[i->GetName()].empty())
-				{
-					closeEntities[i->GetName()] = j->GetName();
-					cout << i->GetName() << " and " << j->GetName() << " are close" << endl;
-				}
-			}
-
-		}*/
 	}
 
 	ParallelThread.join();
@@ -67,11 +51,12 @@ void Game::GetCommand()
 		static bool bShouldShow = true;
 		if( bShouldShow && !m_bShouldExecuteCommand )
 		{
+			
 			m_bShouldExecuteCommand = false;
 
 			bShouldShow = false;
 			cout << "You can choose on of the following options:" << endl;
-			cout << "Type \"destroy \(planet name\)\" to destroy planet's population" << endl;
+			cout << "Type \"destroy (planet name)\" to destroy planet's population" << endl;
 			cout << "Type \"list\" to print the current available planets with their population" << endl;
 			cout << "Type \"init (entity type) (entity amount)\" to add population to a planet" << endl;
 			cout << "Type \"exit\" to exit the simulator" << endl;
@@ -84,6 +69,7 @@ void Game::GetCommand()
 			m_bShouldExecuteCommand = true;
 
 			bShouldShow = true;
+			
 		}
 	}
 }
@@ -92,9 +78,34 @@ void Game::Update()
 {
 	for( auto& i: m_pScene->GetPlanets() )
 	{
-		for( auto& k :i->m_vEntities )
+		for(auto it = i->m_vEntities.begin(); it!= i->m_vEntities.end();)
 		{
-			m_pPhysics->MoveEntity(*k);
+			int energy = (*it).second->GetEnergy();
+			if( (*it).second->GetEnergy() < 0 )
+			{
+				i->m_vEntities.erase(it++);
+			}
+			else
+			{
+				m_pPhysics->MoveEntity(*((*it).second));
+				it++;
+			}
+		}
+	}
+
+	for( auto& k: m_pScene->GetPlanets() )
+	{
+		for( auto& i :k->m_vEntities )
+		{
+			for( auto& j: k->m_vEntities )
+			{
+				if( i!= j && m_pPhysics->IsClose(*(i.second),*(j.second)) )
+				{
+					i.second->Attack(*(j.second));
+
+				}
+			}
+
 		}
 	}
 }

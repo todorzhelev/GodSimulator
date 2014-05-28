@@ -10,6 +10,8 @@ public:
 
 	void Analyze();
 	
+	virtual void Attack(Entity& otherEntity);
+
 
 private:
 

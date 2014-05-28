@@ -52,15 +52,6 @@ unique_ptr<Entity> Scene::CreateEntity(EntityType type)
 
 			break;
 		}
-
-		/*case EntityType::GodType :
-		{
-			unique_ptr<Entity> pNewEntity(new God());
-				
-			pEntity = move(pNewEntity);
-
-			break;
-		}*/
 	}
 
 	return pEntity;

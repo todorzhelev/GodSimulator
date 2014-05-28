@@ -16,7 +16,7 @@ public:
 
 	double GenerateRandomSignedNumber(int nUpperRange);
 
-	double GenerateRandomNumber(int nUpperRange);
+	int GenerateRandomNumber(int nUpperRange);
 
 	int GenerateRandomNumberInRange(int nLowerRange, int nUpperRange);
 

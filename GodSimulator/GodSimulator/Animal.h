@@ -8,21 +8,15 @@ public:
 
 	Animal();
 
-	void Attack(const Entity& entity);
 	void Sleep();
 	void SearchForFood();
 	void Eat();
 
+	virtual void Attack(Entity& otherEntity);
 
 
 
 private:
-
-
-
-
-
-
 
 
 };

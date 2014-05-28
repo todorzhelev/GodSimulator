@@ -45,11 +45,11 @@ string RandomGenerator::GenerateRandomString(int nLength)
 	return strName;
 }
 
-double RandomGenerator::GenerateRandomNumber(int nUpperRange)
+int RandomGenerator::GenerateRandomNumber(int nUpperRange)
 {
 	int nNumber = rand() % nUpperRange;
 	
-	return (double)nNumber;
+	return nNumber+1;
 }
 
 double RandomGenerator::GenerateRandomSignedNumber(int nUpperRange)

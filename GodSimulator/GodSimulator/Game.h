@@ -26,6 +26,8 @@ public:
 
 private:
 
+	mutex m_mutex;
+
 	Physics* m_pPhysics;
 
 	God* pPlayer;

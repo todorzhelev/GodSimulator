@@ -15,6 +15,8 @@ Entity::Entity()
 
 	m_Position = Point3D(x,y,z);
 
+	m_nStrength = m_fEnergy*(RandomGenerator::GetRGen()->GenerateRandomNumber(5));
+
 	CalculateSize();
 	CalculateMass();
 }
@@ -26,6 +28,7 @@ Entity::Entity(string name,double energy,double level,Point3D position)
 	m_nLevel = level;
 	m_Position = position;
 
+	m_nStrength = m_fEnergy*RandomGenerator::GetRGen()->GenerateRandomNumber(5);
 	CalculateSize();
 	CalculateMass();
 }
@@ -47,6 +50,11 @@ double Entity::GetEnergy()
 void Entity::SetEnergy(double energy)
 {
 	m_fEnergy = energy;
+}
+
+void Entity::ModifyEnergy(double energy)
+{
+	m_fEnergy+=energy;
 }
 
 double Entity::GetLevel()
@@ -88,9 +96,28 @@ double Entity::GetMass()
 	return m_fMass;
 }
 
+int Entity::GetStrength()
+{
+	return m_nStrength;
+}
+void Entity::SetStrength(int strength)
+{
+	m_nStrength = strength;
+}
+
 void Entity::Move(Point3D amountTravelled)
 {
 	m_Position.SetX(m_Position.GetX()+amountTravelled.GetX());
 	m_Position.SetY(m_Position.GetY()+amountTravelled.GetY());
 	m_Position.SetZ(m_Position.GetZ()+amountTravelled.GetZ());
+}
+
+void Entity::Attack(Entity& otherEntity)
+{
+
+	int damage = RandomGenerator::GetRGen()->GenerateRandomNumber(m_nStrength);
+
+	//cout << m_strName << " just attacked " << otherEntity.GetName() << " for " << damage << " damage" << endl;
+
+	otherEntity.ModifyEnergy(-damage);
 }

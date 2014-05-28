@@ -18,6 +18,8 @@ public:
 	void CreateEarthquake(const Planet& planet,const Point3D& initialPosition,double force, double duration);
 
 
+	virtual void Attack(Entity& otherEntity);
+
 private:
 
 	int artefact;

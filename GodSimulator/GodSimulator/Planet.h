@@ -1,5 +1,6 @@
 #include<vector>
 #include"Entity.h"
+#include<map>
 
 #pragma once
 
@@ -11,6 +12,6 @@ public:
 
 public:
 
-	std::vector<unique_ptr<Entity>> m_vEntities;
+	std::map<string,unique_ptr<Entity>> m_vEntities;
 
 };

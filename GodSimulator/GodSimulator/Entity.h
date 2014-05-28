@@ -27,6 +27,7 @@ public:
 
 	double GetEnergy();
 	void SetEnergy(double energy);
+	void ModifyEnergy(double energy);
 
 	double GetLevel();
 	void SetLevel(double level);
@@ -39,9 +40,12 @@ public:
 	
 	void Move(Point3D amountTravelled);
 
+	virtual void Attack(Entity& otherEntity);
 
+	int GetStrength();
+	void SetStrength(int strength);
 
-private:
+protected:
 	void CalculateSize();
 	void CalculateMass();
 
@@ -51,4 +55,5 @@ private:
 	double m_fMass;
 	int m_nLevel;
 	Point3D m_Position;
+	int m_nStrength;
 };
