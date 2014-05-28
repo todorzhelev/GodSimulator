@@ -5,7 +5,9 @@ void God::InitPopulation(Planet& planet, EntityType type, int amount)
 {
 	for(int i = 0; i < amount;i++)
 	{
-		unique_ptr<Entity> pEntity(new Human());
+		unique_ptr<Entity> pEntity = move(m_pScene->CreateEntity(type));
+
+		
 
 		planet.m_vEntities.push_back(move(pEntity));
 	}

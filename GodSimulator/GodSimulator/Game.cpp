@@ -28,11 +28,12 @@ void Game::Run()
 
 	using namespace std::placeholders;
 
+	//the thread will be immediately started after next line
 	std::thread ParallelThread(&Game::GetCommand,this);
 
 	while(true)
 	{
-		ParallelCode();
+		Update();
 
 		if( m_bShouldExecuteCommand )
 		{
@@ -72,6 +73,7 @@ void Game::GetCommand()
 			cout << "You can choose on of the following options:" << endl;
 			cout << "Type \"destroy \(planet name\)\" to destroy planet's population" << endl;
 			cout << "Type \"list\" to print the current available planets with their population" << endl;
+			cout << "Type \"init (entity type) (entity amount)\" to add population to a planet" << endl;
 			cout << "Type \"exit\" to exit the simulator" << endl;
 
 			string command;
@@ -86,7 +88,7 @@ void Game::GetCommand()
 	}
 }
 
-void Game::ParallelCode()
+void Game::Update()
 {
 	for( auto& i: m_pScene->GetPlanets() )
 	{

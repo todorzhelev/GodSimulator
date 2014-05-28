@@ -1,5 +1,6 @@
 #include"Human.h"
 #include"Planet.h"
+#include"Scene.h"
 
 #pragma once
 

@@ -22,21 +22,15 @@ public:
 
 	void Run();
 
-	void ParallelCode();
+	void Update();
 
 private:
-
-	std::mutex mutex;
 
 	Physics* m_pPhysics;
 
 	God* pPlayer;
 
-	Scene* m_pScene;
-
 	CommandManager* m_pCommandManager;
-
-	//function<void(string)> ExecuteCommandFunctor;
 
 	bool m_bShouldExecuteCommand;
 

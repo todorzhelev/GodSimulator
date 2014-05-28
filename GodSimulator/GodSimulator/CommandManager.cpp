@@ -30,7 +30,6 @@ vector<string> CommandManager::ParseCommand(string command)
 
 void CommandManager::ExecuteCommand(vector<string> command)
 {
-	m_mutex.lock();
 
 	if( command.size() > 0 )
 	{
@@ -47,13 +46,22 @@ void CommandManager::ExecuteCommand(vector<string> command)
 				cout << "Planet " << i->GetName() <<" with " << i->m_vEntities.size() << " population" << endl;
 			}
 		}
+		else if( command.front().find("init") != std::string::npos)
+		{
+			Planet* pPlanet = m_pScene->GetPlanet(command[1]);
+			EntityType type = m_pScene->ConvertEntityType(command[2]);
+			int amount = stoi(command[3]);
+
+			m_pPlayer->InitPopulation(*pPlanet,type,amount);
+		}
 		else if( command.front().find("exit") != std::string::npos)
 		{
 			exit(0);
 		}
 	}
 
-	m_mutex.unlock();
+	m_vLastCommand.clear();
+
 
 	//m_Commands["init"]    = std::bind(&God::InitPopulation,*m_pPlayer,_1,_2,_3);
 	//m_Commands["name"] = std::bind(&God::GetName,*m_pPlayer);

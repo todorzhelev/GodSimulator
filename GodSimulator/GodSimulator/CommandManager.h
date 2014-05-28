@@ -5,7 +5,6 @@
 #include"God.h"
 #include"Scene.h"
 #include <sstream>
-#include<mutex>
 
 using namespace std;
 
@@ -19,8 +18,6 @@ public:
 	void ExecuteCommand(vector<string> commands);
 
 	vector<string>& GetLastCommand();
-
-	std::mutex m_mutex;
 
 private:
 
