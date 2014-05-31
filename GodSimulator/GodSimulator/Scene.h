@@ -1,4 +1,6 @@
 #include<vector>
+#include<algorithm>
+#include<functional>
 #include"Planet.h"
 #include"Entity.h"
 #include"Animal.h"

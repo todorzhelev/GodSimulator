@@ -19,6 +19,7 @@ public:
 	void SetZ(double z);
 
 	double GetDistance(const Point3D& point1);
+	double GetDistanceToStart();
 
 
 private:

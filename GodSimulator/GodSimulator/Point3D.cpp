@@ -40,3 +40,8 @@ double Point3D::GetDistance(const Point3D& point1)
 				(point1.GetY()-m_fY)*(point1.GetY()-m_fY)+
 				(point1.GetZ()-m_fZ)*(point1.GetZ()-m_fZ));
 }
+
+double Point3D::GetDistanceToStart()
+{
+	return sqrt(m_fX*m_fX+m_fY*m_fY+m_fZ*m_fZ);
+}

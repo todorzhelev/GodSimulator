@@ -31,13 +31,13 @@ void Game::Run()
 
 	while(true)
 	{
-		Update();
-
 		if( m_bShouldExecuteCommand )
 		{
 			m_pCommandManager->ExecuteCommand(m_pCommandManager->GetLastCommand());
 			m_bShouldExecuteCommand = false;
 		}
+
+		Update();
 	}
 
 	ParallelThread.join();
@@ -74,38 +74,42 @@ void Game::GetCommand()
 	}
 }
 
+bool IsEnergyBelowZero(const unique_ptr<Entity>& ent)
+{
+	return ent->GetEnergy() < 0;
+}
+
 void Game::Update()
 {
 	for( auto& i: m_pScene->GetPlanets() )
 	{
-		for(auto it = i->m_vEntities.begin(); it!= i->m_vEntities.end();)
+		i->m_vEntities.erase(std::remove_if(i->m_vEntities.begin(), i->m_vEntities.end(), IsEnergyBelowZero),i->m_vEntities.end());
+	}
+
+	for( auto& i: m_pScene->GetPlanets() )
+	{
+		for(auto it = i->m_vEntities.begin(); it!= i->m_vEntities.end();it++)
 		{
-			int energy = (*it).second->GetEnergy();
-			if( (*it).second->GetEnergy() < 0 )
-			{
-				i->m_vEntities.erase(it++);
-			}
-			else
-			{
-				m_pPhysics->MoveEntity(*((*it).second));
-				it++;
-			}
+				m_pPhysics->MoveEntity(*(*it));
 		}
+	}
+
+	for( auto& i: m_pScene->GetPlanets() )
+	{
+		i->SortEntities();
 	}
 
 	for( auto& k: m_pScene->GetPlanets() )
 	{
-		for( auto& i :k->m_vEntities )
+		for(auto it = k->m_vEntities.begin(); it!= k->m_vEntities.end();it++)
 		{
-			for( auto& j: k->m_vEntities )
+			auto nextEntity = it;
+			nextEntity++;
+
+			if( nextEntity != k->m_vEntities.end() && m_pPhysics->IsClose(*(*it),*(*nextEntity)) )
 			{
-				if( i!= j && m_pPhysics->IsClose(*(i.second),*(j.second)) )
-				{
-					i.second->Attack(*(j.second));
-
-				}
+				(*it)->Attack(*(*nextEntity));
 			}
-
 		}
 	}
 }
