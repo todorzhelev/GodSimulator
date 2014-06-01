@@ -12,6 +12,8 @@ Game::Game()
 	m_pPhysics = new Physics;
 
 	m_pCommandManager = new CommandManager(pPlayer,m_pScene);
+
+	//stream.open("log.txt");
 }
 
 void Game::Run()
@@ -81,11 +83,18 @@ bool IsEnergyBelowZero(const unique_ptr<Entity>& ent)
 
 void Game::Update()
 {
+	//stream << "Starting Update method" << endl;
+
+	//auto start_time = chrono::high_resolution_clock::now();
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		i->m_vEntities.erase(std::remove_if(i->m_vEntities.begin(), i->m_vEntities.end(), IsEnergyBelowZero),i->m_vEntities.end());
 	}
+	//auto end_time = chrono::high_resolution_clock::now();
 
+	//stream << "Deletion dead entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms" << endl;
+
+	//start_time = chrono::high_resolution_clock::now();
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		for(auto it = i->m_vEntities.begin(); it!= i->m_vEntities.end();it++)
@@ -93,12 +102,20 @@ void Game::Update()
 				m_pPhysics->MoveEntity(*(*it));
 		}
 	}
+	//end_time = chrono::high_resolution_clock::now();
 
+	//stream << "Moving entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms"<< endl;
+
+	//start_time = chrono::high_resolution_clock::now();
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		i->SortEntities();
 	}
+	//end_time = chrono::high_resolution_clock::now();
 
+	//stream << "Sorting entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms"<< endl;
+
+	//start_time = chrono::high_resolution_clock::now();
 	for( auto& k: m_pScene->GetPlanets() )
 	{
 		for(auto it = k->m_vEntities.begin(); it!= k->m_vEntities.end();it++)
@@ -112,4 +129,9 @@ void Game::Update()
 			}
 		}
 	}
+	//end_time = chrono::high_resolution_clock::now();
+
+	//stream << "Attacking close entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms" << endl;
+
+	//stream << "End of Update method " << endl << "--------------------------------------------------------" << endl;
 }

@@ -8,8 +8,11 @@
 #include"CommandManager.h"
 #include<map>
 #include<mutex>
+#include<chrono>
+#include<fstream>
 
 #pragma once
+using namespace chrono;
 
 class Game
 {
@@ -35,5 +38,7 @@ private:
 	CommandManager* m_pCommandManager;
 
 	bool m_bShouldExecuteCommand;
+
+	ofstream stream;
 
 };

@@ -45,9 +45,6 @@
     <ClInclude Include="Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DisplayEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CommandManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,9 +81,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DisplayEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandManager.cpp">

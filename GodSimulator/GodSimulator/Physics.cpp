@@ -1,6 +1,9 @@
 #include"Physics.h"
 
 const double dist = 300;
+const int nLowerBound = 0;
+const int nUpperBound = 15000;
+const int nMoveRate = 1000;
 
 bool Physics::IsClose(const Entity& ent1,const Entity& ent2)
 {
@@ -9,19 +12,19 @@ bool Physics::IsClose(const Entity& ent1,const Entity& ent2)
 
 void Physics::MoveEntity(Entity& ent)
 {
-	double dx = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(1000);
-	double dy = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(1000);
-	double dz = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(1000);
+	double dx = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(nMoveRate);
+	double dy = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(nMoveRate);
+	double dz = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(nMoveRate);
 
-	if( ent.GetPosition().GetX()+dx < 0 )
+	if( ent.GetPosition().GetX()+dx < nLowerBound || ent.GetPosition().GetX()+dx >nUpperBound  )
 	{
 		dx = 0;
 	}
-	if( ent.GetPosition().GetY()+dy < 0 )
+	if( ent.GetPosition().GetY()+dy < nLowerBound || ent.GetPosition().GetY()+dy >nUpperBound)
 	{
 		dy = 0;
 	}
-	if( ent.GetPosition().GetX()+dz < 0 )
+	if( ent.GetPosition().GetX()+dz < nLowerBound  || ent.GetPosition().GetZ()+dz >nUpperBound)
 	{
 		dz = 0;
 	}

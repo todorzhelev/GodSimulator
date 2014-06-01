@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClInclude Include="Animal.h" />
     <ClInclude Include="CommandManager.h" />
-    <ClInclude Include="DisplayEngine.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="God.h" />
@@ -27,7 +26,6 @@
   <ItemGroup>
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="CommandManager.cpp" />
-    <ClCompile Include="DisplayEngine.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="God.cpp" />
