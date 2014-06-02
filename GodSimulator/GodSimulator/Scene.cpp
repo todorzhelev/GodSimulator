@@ -1,13 +1,14 @@
 #include"Scene.h"
+#include"God.h"
 
 Scene* m_pScene = nullptr;
 
-std::vector<Planet*>& Scene::GetPlanets()
+std::vector<unique_ptr<Planet>>& Scene::GetPlanets()
 {
 	return m_Planets;
 }
 
-Planet* Scene::GetPlanet(string strPlanetName)
+unique_ptr<Planet>& Scene::GetPlanet(string strPlanetName)
 {
 	for(auto& i : m_Planets )
 	{
@@ -17,7 +18,7 @@ Planet* Scene::GetPlanet(string strPlanetName)
 		}
 	}
 
-	return nullptr;
+	return unique_ptr<Planet>(nullptr);
 }
 
 unique_ptr<Entity> Scene::CreateEntity(EntityType type)
@@ -52,6 +53,15 @@ unique_ptr<Entity> Scene::CreateEntity(EntityType type)
 
 			break;
 		}
+
+		case EntityType::GodType :
+		{
+			unique_ptr<Entity> pNewEntity(new God());
+				
+			pEntity = move(pNewEntity);
+
+			break;
+		}
 	}
 
 	return pEntity;
@@ -74,6 +84,10 @@ EntityType Scene::ConvertEntityType(string type)
 	else if( type.find("human") != std::string::npos)
 	{
 		convertedType = EntityType::HumanType;
+	}
+	else if( type.find("god") != std::string::npos)
+	{
+		convertedType = EntityType::GodType;
 	}
 
 	return convertedType;

@@ -1,22 +1,15 @@
-#include"Entity.h"
-#include"Animal.h"
+#include<map>
+#include<thread>
 #include"RandomGenerator.h"
-#include"God.h"
 #include"Scene.h"
-#include"Planet.h"
+#include"God.h"
 #include"Physics.h"
 #include"CommandManager.h"
-#include<map>
-#include<mutex>
-#include<chrono>
-#include<fstream>
 
 #pragma once
-using namespace chrono;
 
 class Game
 {
-	
 public:
 
 	Game();
@@ -27,9 +20,9 @@ public:
 
 	void Update();
 
-private:
+	void PrintOptions();
 
-	mutex m_mutex;
+private:
 
 	Physics* m_pPhysics;
 
@@ -38,7 +31,4 @@ private:
 	CommandManager* m_pCommandManager;
 
 	bool m_bShouldExecuteCommand;
-
-	ofstream stream;
-
 };

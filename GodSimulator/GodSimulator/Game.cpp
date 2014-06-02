@@ -1,5 +1,4 @@
 #include"Game.h"
-#include<thread>
 
 Game::Game()
 {
@@ -12,17 +11,15 @@ Game::Game()
 	m_pPhysics = new Physics;
 
 	m_pCommandManager = new CommandManager(pPlayer,m_pScene);
-
-	//stream.open("log.txt");
 }
 
 void Game::Run()
 {
-	Planet* planet = new Planet;
+	unique_ptr<Planet> pPlanet(new Planet);
 
-	m_pScene->GetPlanets().push_back(planet);
+	m_pScene->GetPlanets().push_back(move(pPlanet));
 
-	pPlayer->InitPopulation(*planet,EntityType::BasicEntity,200);
+	pPlayer->AddEntities(*(m_pScene->GetPlanets().front()),EntityType::BasicEntity,200);
 
 	map<string,string> closeEntities;
 
@@ -52,49 +49,48 @@ void Game::GetCommand()
 	{
 		static bool bShouldShow = true;
 		if( bShouldShow && !m_bShouldExecuteCommand )
-		{
-			
+		{		
 			m_bShouldExecuteCommand = false;
-
 			bShouldShow = false;
-			cout << "You can choose on of the following options:" << endl;
-			cout << "Type \"destroy (planet name)\" to destroy planet's population" << endl;
-			cout << "Type \"list\" to print the current available planets with their population" << endl;
-			cout << "Type \"init (entity type) (entity amount)\" to add population to a planet" << endl;
-			cout << "Type \"exit\" to exit the simulator" << endl;
+
+			PrintOptions();
 
 			string command;
 			getline(cin,command);
 
-			vector<string> commands = m_pCommandManager->ParseCommand(command);
+			m_pCommandManager->ParseCommand(command);
 		
 			m_bShouldExecuteCommand = true;
-
-			bShouldShow = true;
-			
+			bShouldShow = true;	
 		}
 	}
 }
 
-bool IsEnergyBelowZero(const unique_ptr<Entity>& ent)
+void Game::PrintOptions()
 {
-	return ent->GetEnergy() < 0;
+	cout << "You can choose on of the following options:" << endl;
+	cout << "Type \"destroy (planet name)\" to destroy planet's population" << endl;
+	cout << "Type \"list\" to print the current available planets with their population" << endl;
+	cout << "Type \"add (planet name) (entity,animal,human or god) (entity amount)\" to add population to a planet" << endl;
+	cout << "Type \"create\" to create random planet" << endl;
+	cout << "Type \"exit\" to exit the simulator" << endl;
 }
 
 void Game::Update()
 {
-	//stream << "Starting Update method" << endl;
-
-	//auto start_time = chrono::high_resolution_clock::now();
+	//removes all dead entities
 	for( auto& i: m_pScene->GetPlanets() )
 	{
-		i->m_vEntities.erase(std::remove_if(i->m_vEntities.begin(), i->m_vEntities.end(), IsEnergyBelowZero),i->m_vEntities.end());
+		//lambda function to test the entity energy
+		auto func = [](unique_ptr<Entity>& ent){return ent->GetEnergy() < 0;};
+
+		//all entities that have their energy below zero are moved at the end of the array with remove_if function.
+		//then they are all erased with the erase function
+		i->m_vEntities.erase(remove_if(i->m_vEntities.begin(), i->m_vEntities.end(),func),
+							 i->m_vEntities.end());
 	}
-	//auto end_time = chrono::high_resolution_clock::now();
 
-	//stream << "Deletion dead entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms" << endl;
-
-	//start_time = chrono::high_resolution_clock::now();
+	//moves entites around
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		for(auto it = i->m_vEntities.begin(); it!= i->m_vEntities.end();it++)
@@ -102,20 +98,15 @@ void Game::Update()
 				m_pPhysics->MoveEntity(*(*it));
 		}
 	}
-	//end_time = chrono::high_resolution_clock::now();
 
-	//stream << "Moving entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms"<< endl;
-
-	//start_time = chrono::high_resolution_clock::now();
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		i->SortEntities();
 	}
-	//end_time = chrono::high_resolution_clock::now();
 
-	//stream << "Sorting entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms"<< endl;
-
-	//start_time = chrono::high_resolution_clock::now();
+	//after the entities are sorted by distance from the beginning
+	//we watch only for two consequent entities in the vector, since they have the chance
+	//to be close enough
 	for( auto& k: m_pScene->GetPlanets() )
 	{
 		for(auto it = k->m_vEntities.begin(); it!= k->m_vEntities.end();it++)
@@ -129,9 +120,4 @@ void Game::Update()
 			}
 		}
 	}
-	//end_time = chrono::high_resolution_clock::now();
-
-	//stream << "Attacking close entities " << chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << " ms" << endl;
-
-	//stream << "End of Update method " << endl << "--------------------------------------------------------" << endl;
 }

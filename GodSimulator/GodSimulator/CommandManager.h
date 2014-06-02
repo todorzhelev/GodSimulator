@@ -1,12 +1,11 @@
 #include<iostream>
-#include"Entity.h"
 #include<map>
-#include"Planet.h"
-#include"God.h"
 #include"Scene.h"
-#include <sstream>
+#include<sstream>
 
 using namespace std;
+
+class God;
 
 class CommandManager
 {
@@ -21,13 +20,8 @@ public:
 
 private:
 
-	
-
 	God* m_pPlayer;
 	Scene* m_pScene;
 
 	vector<string> m_vLastCommand;
-
-	//map<string,std::function<void(Planet&)>> m_Commands;
-
 };

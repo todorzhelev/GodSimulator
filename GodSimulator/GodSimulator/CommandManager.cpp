@@ -1,16 +1,13 @@
 #include"CommandManager.h"
+#include"God.h"
 
 CommandManager::CommandManager(God* pPlayer,Scene* pScene)
 {
 	m_pPlayer = pPlayer;
 	m_pScene = pScene;
-
-	//using namespace std::placeholders;
-
-	//m_Commands["destroy"] = std::bind(&God::DestroyEntirePopulation,*m_pPlayer,_1);
-
 }
 
+//parse the command by empty spaces
 vector<string> CommandManager::ParseCommand(string command)
 {
 	string temp;
@@ -30,14 +27,17 @@ vector<string> CommandManager::ParseCommand(string command)
 
 void CommandManager::ExecuteCommand(vector<string> command)
 {
-
 	if( command.size() > 0 )
 	{
 		if( command.front().find("destroy") != std::string::npos )
 		{
-			Planet* pPlanet = m_pScene->GetPlanet(command[1]);
-			m_pPlayer->DestroyEntirePopulation(*pPlanet);
+			unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
+			if( pPlanet )
+			{
+				m_pPlayer->DestroyEntirePopulation(*pPlanet);
 
+				cout << "Population destroyed!" << endl << endl;
+			}
 		}
 		else if( command.front().find("list") != std::string::npos)
 		{
@@ -45,14 +45,25 @@ void CommandManager::ExecuteCommand(vector<string> command)
 			{
 				cout << "Planet " << i->GetName() <<" with " << i->m_vEntities.size() << " population" << endl;
 			}
+			cout << endl << endl;
 		}
-		else if( command.front().find("init") != std::string::npos)
+		else if( command.front().find("add") != std::string::npos)
 		{
-			Planet* pPlanet = m_pScene->GetPlanet(command[1]);
+			unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
 			EntityType type = m_pScene->ConvertEntityType(command[2]);
 			int amount = stoi(command[3]);
 
-			m_pPlayer->InitPopulation(*pPlanet,type,amount);
+			if( pPlanet )
+			{
+				m_pPlayer->AddEntities(*pPlanet,type,amount);
+
+				cout << "Entities successfuly added!" << endl << endl;
+			}
+		}
+		else if( command.front().find("create") != std::string::npos)
+		{
+			m_pPlayer->CreatePlanet();
+			cout << "Planet successfuly created!" << endl << endl;
 		}
 		else if( command.front().find("exit") != std::string::npos)
 		{
@@ -61,11 +72,6 @@ void CommandManager::ExecuteCommand(vector<string> command)
 	}
 
 	m_vLastCommand.clear();
-
-
-	//m_Commands["init"]    = std::bind(&God::InitPopulation,*m_pPlayer,_1,_2,_3);
-	//m_Commands["name"] = std::bind(&God::GetName,*m_pPlayer);
-
 }
 
 vector<string>& CommandManager::GetLastCommand()

@@ -114,10 +114,7 @@ void Entity::Move(Point3D amountTravelled)
 
 void Entity::Attack(Entity& otherEntity)
 {
-
 	int damage = RandomGenerator::GetRGen()->GenerateRandomNumber(m_nStrength);
-
-	//cout << m_strName << " just attacked " << otherEntity.GetName() << " for " << damage << " damage" << endl;
 
 	otherEntity.ModifyEnergy(-damage);
 }

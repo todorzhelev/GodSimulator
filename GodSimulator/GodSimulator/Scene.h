@@ -1,10 +1,9 @@
-#include<vector>
-#include<algorithm>
 #include<functional>
 #include"Planet.h"
 #include"Entity.h"
 #include"Animal.h"
 #include"Human.h"
+
 
 #pragma once 
 
@@ -13,9 +12,9 @@ class Scene
 
 public:
 
-	std::vector<Planet*>& GetPlanets();
+	std::vector<unique_ptr<Planet>>& GetPlanets();
 
-	Planet* GetPlanet(string strPlanetName);
+	unique_ptr<Planet>& GetPlanet(string strPlanetName);
 
 	unique_ptr<Entity> CreateEntity(EntityType type);
 
@@ -25,7 +24,7 @@ public:
 private:
 
 
-	std::vector<Planet*> m_Planets;
+	std::vector<unique_ptr<Planet>> m_Planets;
 };
 
 extern Scene* m_pScene;
