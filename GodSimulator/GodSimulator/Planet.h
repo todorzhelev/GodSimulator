@@ -21,4 +21,5 @@ public:
 public:
 
 	vector<unique_ptr<Entity>> m_vEntities;
+	map<EntityType, int> m_EntitiesToBeAdded;
 };

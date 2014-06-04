@@ -2,6 +2,7 @@
 
 Planet::Planet():Entity()
 {
+
 }
 
 bool Planet::EntitesComparator(const unique_ptr<Entity>& ent1,const unique_ptr<Entity>& ent2)

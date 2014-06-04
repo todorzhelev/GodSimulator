@@ -19,7 +19,7 @@ void Game::Run()
 
 	m_pScene->GetPlanets().push_back(move(pPlanet));
 
-	pPlayer->AddEntities(*(m_pScene->GetPlanets().front()),EntityType::BasicEntity,200);
+	pPlayer->AddEntities(*(m_pScene->GetPlanets().front()),EntityType::HumanType,200);
 
 	map<string,string> closeEntities;
 
@@ -78,7 +78,7 @@ void Game::PrintOptions()
 
 void Game::Update()
 {
-	//removes all dead entities
+	//removes all dead entities and adds the newly created entities
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		//lambda function to test the entity energy
@@ -88,6 +88,19 @@ void Game::Update()
 		//then they are all erased with the erase function
 		i->m_vEntities.erase(remove_if(i->m_vEntities.begin(), i->m_vEntities.end(),func),
 							 i->m_vEntities.end());
+
+		//add new entities
+		for( auto it = i->m_EntitiesToBeAdded.begin();it!=i->m_EntitiesToBeAdded.end();it++)
+		{
+			for( int j = 0; j < it->second;j++)
+			{
+				unique_ptr<Entity> pEntity = move(m_pScene->CreateEntity(it->first));
+
+				i->m_vEntities.push_back(move(pEntity));
+			}
+		}
+
+		i->m_EntitiesToBeAdded.clear();
 	}
 
 	//moves entites around
@@ -116,7 +129,7 @@ void Game::Update()
 
 			if( nextEntity != k->m_vEntities.end() && m_pPhysics->IsClose(*(*it),*(*nextEntity)) )
 			{
-				(*it)->Attack(*(*nextEntity));
+				(*it)->DoAction(k,*(*nextEntity));
 			}
 		}
 	}

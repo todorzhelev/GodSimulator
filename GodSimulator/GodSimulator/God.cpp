@@ -30,3 +30,22 @@ void God::Attack(Entity& otherEntity)
 
 	otherEntity.ModifyEnergy(-damage);
 }
+
+void God::Mate(unique_ptr<Planet>& pPlanet)
+{
+	pPlanet->m_EntitiesToBeAdded[EntityType::GodType]++;
+}
+
+void God::DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity)
+{
+	int number = RandomGenerator::GetRGen()->GenerateRandomNumber(6);
+	switch(number)
+	{
+		case 1: Attack(otherEntity); break;
+		case 2: Sleep(); break;
+		case 3: SearchForFood(); break;
+		case 4: Eat(); break;
+		case 5: Mate(pPlanet); break;
+		case 6: Analyze(); break;
+	};
+}

@@ -12,9 +12,10 @@ public:
 	void SearchForFood();
 	void Eat();
 
-	virtual void Attack(Entity& otherEntity);
+	void Attack(Entity& otherEntity);
+	void Mate(unique_ptr<Planet>& pPlanet);
 
-
+	virtual void DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity);
 
 private:
 

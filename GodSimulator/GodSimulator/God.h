@@ -11,5 +11,8 @@ public:
 	void DestroyEntirePopulation(Planet& planet);
 	void AddEntities(Planet& planet, EntityType type, int amount);
 	void CreatePlanet();
-	virtual void Attack(Entity& otherEntity);
+	void Attack(Entity& otherEntity);
+
+	void Mate(unique_ptr<Planet>& pPlanet);
+	virtual void DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity);
 };

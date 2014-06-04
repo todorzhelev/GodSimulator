@@ -7,12 +7,25 @@ using namespace std;
 
 #pragma once 
 
+class Planet;
+
 enum EntityType
 {
 	BasicEntity,
 	AnimalType,
 	HumanType,
 	GodType
+};
+
+enum States
+{
+	Unknown,
+	Moving,
+	Attacking,
+	Eating,
+	SearchingForFood,
+	Sleeping,
+	Analyzing
 };
 
 class Entity
@@ -40,7 +53,12 @@ public:
 	
 	void Move(Point3D amountTravelled);
 
-	virtual void Attack(Entity& otherEntity);
+	void Attack(Entity& otherEntity);
+
+	virtual void DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity);
+
+	void SetState(States state);
+	States GetState();
 
 	int GetStrength();
 	void SetStrength(int strength);
@@ -56,4 +74,5 @@ protected:
 	int m_nLevel;
 	Point3D m_Position;
 	int m_nStrength;
+	States m_State;
 };

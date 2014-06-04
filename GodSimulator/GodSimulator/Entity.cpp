@@ -105,6 +105,15 @@ void Entity::SetStrength(int strength)
 	m_nStrength = strength;
 }
 
+void Entity::SetState(States state)
+{
+	m_State = state;
+}
+States Entity::GetState()
+{
+	return m_State;
+}
+
 void Entity::Move(Point3D amountTravelled)
 {
 	m_Position.SetX(m_Position.GetX()+amountTravelled.GetX());
@@ -117,4 +126,9 @@ void Entity::Attack(Entity& otherEntity)
 	int damage = RandomGenerator::GetRGen()->GenerateRandomNumber(m_nStrength);
 
 	otherEntity.ModifyEnergy(-damage);
+}
+
+void Entity::DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity)
+{
+	Attack(otherEntity);
 }

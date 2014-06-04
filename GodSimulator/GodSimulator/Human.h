@@ -10,16 +10,8 @@ public:
 
 	void Analyze();
 	
-	virtual void Attack(Entity& otherEntity);
-
-
-private:
-
-	double m_fWillForce;
-	double m_fIntellect;
-	double m_fDepressionLevel;
-
-
-
+	void Attack(Entity& otherEntity);
+	void Mate(unique_ptr<Planet>& pPlanet);
+	virtual void DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity);
 
 };
