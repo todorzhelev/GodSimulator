@@ -2,7 +2,6 @@ GodSimulator
 ============
 
 This program simulates a God, which has control over planets and entities on the planets.
-
 Entities can do different actions, based on their type.
 At any moment the player can monitor the current population at all the planets, 
 can destroy the population at certain planet,
