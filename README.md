@@ -20,5 +20,5 @@ performing their actions.
 The program relies mostly on the random generator, as all the decisions are taken by random and the entities are moving
 around by a random amount. Also the names of the entities are chosen by random.(Including the player's name)
 
-The program can support up to 200 000 entities before starting to respond slow on the commands by the player.
-The commands are typed by the player and then are parsed by the program.
+Up to 200 000 entities can be supported before the sumilator will start to respond slow on the commands by the player.
+The commands are typed by the player and then are parsed.
