@@ -74,7 +74,7 @@ std::unique_ptr<Entity> Scene::CreateEntity(EntityType type)
 //converts from string to EntityType
 EntityType Scene::ConvertEntityType(std::string type)
 {
-	EntityType convertedType;
+	EntityType convertedType = EntityType::UnknownType;
 
 	if( type.find("entity") != std::string::npos )
 	{

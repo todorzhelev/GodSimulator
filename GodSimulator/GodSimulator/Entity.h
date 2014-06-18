@@ -8,15 +8,16 @@
 
 class Planet;
 
-enum EntityType
+enum class EntityType
 {
 	BasicEntity,
 	AnimalType,
 	HumanType,
-	GodType
+	GodType,
+	UnknownType
 };
 
-enum States
+enum class States
 {
 	Unknown,
 	Moving,
@@ -32,7 +33,7 @@ class Entity
 public:
 
 	Entity();
-	Entity(std::string name,double energy,double level,Point3D position);
+	Entity(std::string name,double energy,Point3D position);
 
 	std::string GetName();
 	void SetName(std::string name);
@@ -40,9 +41,6 @@ public:
 	double GetEnergy();
 	void SetEnergy(double energy);
 	void ModifyEnergy(double energy);
-
-	double GetLevel();
-	void SetLevel(double level);
 
 	Point3D GetPosition() const;
 	void SetPosition(Point3D position);
@@ -70,7 +68,6 @@ protected:
 	double		 m_fEnergy;
 	double		 m_fSize;
 	double		 m_fMass;
-	int			 m_nLevel;
 	Point3D		 m_Position;
 	int			 m_nStrength;
 	States		 m_State;

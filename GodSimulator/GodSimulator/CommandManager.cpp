@@ -35,12 +35,23 @@ void CommandManager::ExecuteCommand(std::vector<std::string> command)
 	{
 		if( command.front().find("destroy") != string::npos )
 		{
-			unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
-			if( pPlanet )
+			if( command.size() == 2 )
 			{
-				m_pPlayer->DestroyEntirePopulation(*pPlanet);
+				unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
+				if( pPlanet )
+				{
+					m_pPlayer->DestroyEntirePopulation(*pPlanet);
 
-				cout << "Population destroyed!" << endl << endl;
+					cout << "Population destroyed!" << endl << endl;
+				}
+				else
+				{
+					cout << "Planet " << command[1] << " does not exist. Type \"list\" to see the current planets." << endl << endl;
+				}
+			}
+			else
+			{
+				cout << "Incorrect command parameters" << endl << endl;
 			}
 		}
 		else if( command.front().find("list") != string::npos)
@@ -53,15 +64,32 @@ void CommandManager::ExecuteCommand(std::vector<std::string> command)
 		}
 		else if( command.front().find("add") != string::npos)
 		{
-			unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
-			EntityType type = m_pScene->ConvertEntityType(command[2]);
-			int amount = stoi(command[3]);
-
-			if( pPlanet )
+			if( command.size() == 4 )
 			{
-				m_pPlayer->AddEntities(*pPlanet,type,amount);
+				unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
+				EntityType type = m_pScene->ConvertEntityType(command[2]);
+				if( type == EntityType::UnknownType )
+				{
+					cout << "Incorrect entity type. Possible types are entity, animal, human or god." << endl << endl;
+					m_vLastCommand.clear();
+					return;
+				}
+				int amount = stoi(command[3]);
 
-				cout << "Entities successfuly added!" << endl << endl;
+				if( pPlanet )
+				{
+					m_pPlayer->AddEntities(*pPlanet,type,amount);
+
+					cout << "Entities successfuly added!" << endl << endl;
+				}
+				else
+				{
+					cout << "Planet " << command[1] << " does not exist. Type \"list\" to see the current planets." << endl << endl;
+				}
+			}
+			else
+			{
+				cout << "Incorrect command parameters" << endl << endl;
 			}
 		}
 		else if( command.front().find("create") != string::npos)

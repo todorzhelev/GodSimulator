@@ -3,6 +3,7 @@
 
 Planet::Planet()
 {
+
 }
 
 std::vector<std::unique_ptr<Entity>>& Planet::GetEntities()

@@ -2,12 +2,11 @@
 
 Entity::Entity()
 {
-	int nNameLenght = RandomGenerator::GetRGen()->GenerateRandomNumberInRange(4,8);
+	int nNameLenght = RandomGenerator::GetRGen()->GenerateRandomNumberInRange(4,6);
 
 	m_strName = RandomGenerator::GetRGen()->GenerateRandomString(nNameLenght);
 
 	m_fEnergy = RandomGenerator::GetRGen()->GenerateRandomNumber(100);
-	m_nLevel = 0;
 
 	double x = RandomGenerator::GetRGen()->GenerateRandomNumber(10000);
 	double y = RandomGenerator::GetRGen()->GenerateRandomNumber(10000);
@@ -15,20 +14,19 @@ Entity::Entity()
 
 	m_Position = Point3D(x,y,z);
 
-	m_nStrength = m_fEnergy*(RandomGenerator::GetRGen()->GenerateRandomNumber(5));
+	m_nStrength = (int)m_fEnergy*(RandomGenerator::GetRGen()->GenerateRandomNumber(5));
 
 	CalculateSize();
 	CalculateMass();
 }
 
-Entity::Entity(std::string name,double energy,double level,Point3D position)
+Entity::Entity(std::string name,double energy,Point3D position)
 {
 	m_strName = name;
 	m_fEnergy = energy;
-	m_nLevel = level;
 	m_Position = position;
 
-	m_nStrength = m_fEnergy*RandomGenerator::GetRGen()->GenerateRandomNumber(5);
+	m_nStrength = (int)m_fEnergy*RandomGenerator::GetRGen()->GenerateRandomNumber(5);
 	CalculateSize();
 	CalculateMass();
 }
@@ -57,16 +55,6 @@ void Entity::ModifyEnergy(double energy)
 	m_fEnergy+=energy;
 }
 
-double Entity::GetLevel()
-{
-	return m_nLevel;
-}
-
-void Entity::SetLevel(double level)
-{
-	m_nLevel = level;
-}
-
 Point3D Entity::GetPosition() const
 {
 	return m_Position;
@@ -78,7 +66,7 @@ void Entity::SetPosition(Point3D position)
 
 void Entity::CalculateSize()
 {
-	m_fSize = m_fEnergy+m_nLevel;
+	m_fSize = m_fEnergy*2;
 }
 
 void Entity::CalculateMass()
