@@ -4,7 +4,6 @@
 #include"Animal.h"
 #include"Human.h"
 
-
 #pragma once 
 
 class Scene
@@ -12,19 +11,19 @@ class Scene
 
 public:
 
-	std::vector<unique_ptr<Planet>>& GetPlanets();
+	std::vector<std::unique_ptr<Planet>>& GetPlanets();
 
-	unique_ptr<Planet>& GetPlanet(string strPlanetName);
+	std::unique_ptr<Planet>& GetPlanet(std::string strPlanetName);
 
-	unique_ptr<Entity> CreateEntity(EntityType type);
+	std::unique_ptr<Entity> CreateEntity(EntityType type);
 
 	//converts from string to EntityType
-	EntityType ConvertEntityType(string type);
+	EntityType ConvertEntityType(std::string type);
 
 private:
 
 
-	std::vector<unique_ptr<Planet>> m_Planets;
+	std::vector<std::unique_ptr<Planet>> m_Planets;
 };
 
 extern Scene* m_pScene;

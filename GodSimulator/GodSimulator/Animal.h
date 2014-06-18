@@ -13,9 +13,9 @@ public:
 	void Eat();
 
 	void Attack(Entity& otherEntity);
-	void Mate(unique_ptr<Planet>& pPlanet);
+	void Mate(std::unique_ptr<Planet>& pPlanet);
 
-	virtual void DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity);
+	virtual void DoAction(std::unique_ptr<Planet>& pPlanet,Entity& otherEntity);
 
 private:
 

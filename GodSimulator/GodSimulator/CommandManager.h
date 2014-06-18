@@ -1,9 +1,5 @@
-#include<iostream>
-#include<map>
 #include"Scene.h"
 #include<sstream>
-
-using namespace std;
 
 class God;
 
@@ -13,15 +9,15 @@ public:
 
 	CommandManager(God* pPlayer,Scene* pScene);
 
-	vector<string> ParseCommand(string command);
-	void ExecuteCommand(vector<string> commands);
+	std::vector<std::string> ParseCommand(std::string command);
+	void ExecuteCommand(std::vector<std::string> commands);
 
-	vector<string>& GetLastCommand();
+	std::vector<std::string>& GetLastCommand();
 
 private:
 
 	God* m_pPlayer;
 	Scene* m_pScene;
 
-	vector<string> m_vLastCommand;
+	std::vector<std::string> m_vLastCommand;
 };

@@ -5,23 +5,23 @@ void God::AddEntities(Planet& planet, EntityType type, int amount)
 {
 	for(int i = 0; i < amount;i++)
 	{
-		unique_ptr<Entity> pEntity = move(m_pScene->CreateEntity(type));
+		std::unique_ptr<Entity> pEntity = move(m_pScene->CreateEntity(type));
 
-		planet.m_vEntities.push_back(move(pEntity));
+		planet.GetEntities().push_back(std::move(pEntity));
 	}
 }
 
 
 void God::DestroyEntirePopulation(Planet& planet)
 {
-	planet.m_vEntities.erase(planet.m_vEntities.begin(),planet.m_vEntities.end());
+	planet.GetEntities().erase(planet.GetEntities().begin(),planet.GetEntities().end());
 }
 
 void God::CreatePlanet()
 {
-	unique_ptr<Planet> pPlanet(new Planet);
+	std::unique_ptr<Planet> pPlanet(new Planet);
 
-	m_pScene->GetPlanets().push_back(move(pPlanet));
+	m_pScene->GetPlanets().push_back(std::move(pPlanet));
 }
 
 void God::Attack(Entity& otherEntity)
@@ -31,12 +31,12 @@ void God::Attack(Entity& otherEntity)
 	otherEntity.ModifyEnergy(-damage);
 }
 
-void God::Mate(unique_ptr<Planet>& pPlanet)
+void God::Mate(std::unique_ptr<Planet>& pPlanet)
 {
-	pPlanet->m_EntitiesToBeAdded[EntityType::GodType]++;
+	pPlanet->GetEntitiesToBeAdded()[EntityType::GodType]++;
 }
 
-void God::DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity)
+void God::DoAction(std::unique_ptr<Planet>& pPlanet,Entity& otherEntity)
 {
 	int number = RandomGenerator::GetRGen()->GenerateRandomNumber(6);
 	switch(number)

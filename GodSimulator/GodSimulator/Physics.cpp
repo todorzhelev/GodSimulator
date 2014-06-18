@@ -16,6 +16,7 @@ void Physics::MoveEntity(Entity& ent)
 	double dy = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(nMoveRate);
 	double dz = RandomGenerator::GetRGen()->GenerateRandomSignedNumber(nMoveRate);
 
+	//restrict the entities into bounds
 	if( ent.GetPosition().GetX()+dx < nLowerBound || ent.GetPosition().GetX()+dx >nUpperBound  )
 	{
 		dx = 0;

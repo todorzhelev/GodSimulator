@@ -1,11 +1,10 @@
 #include"Animal.h"
-#include"Scene.h"
+#include"Planet.h"
 
 Animal::Animal()
 {
-
-
 }
+
 void Animal::Attack(Entity& otherEntity)
 {
 	int damage = RandomGenerator::GetRGen()->GenerateRandomNumber(m_nStrength)*3;
@@ -28,12 +27,12 @@ void Animal::Eat()
 	m_State = States::Eating;
 }
 
-void Animal::Mate(unique_ptr<Planet>& pPlanet)
+void Animal::Mate(std::unique_ptr<Planet>& pPlanet)
 {
-	pPlanet->m_EntitiesToBeAdded[EntityType::AnimalType]++;
+	pPlanet->GetEntitiesToBeAdded()[EntityType::AnimalType]++;
 }
 
-void Animal::DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity)
+void Animal::DoAction(std::unique_ptr<Planet>& pPlanet,Entity& otherEntity)
 {
 	int number = RandomGenerator::GetRGen()->GenerateRandomNumber(5);
 	switch(number)

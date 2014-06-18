@@ -1,6 +1,6 @@
 #include"RandomGenerator.h"
 
-RandomGenerator* RandomGenerator::rger = nullptr;
+RandomGenerator* RandomGenerator::m_pRGen = nullptr;
 
 RandomGenerator::RandomGenerator()
 {}
@@ -29,12 +29,14 @@ char RandomGenerator::GenerateRandomChar(bool bIsCapital)
 
 }
 
-string RandomGenerator::GenerateRandomString(int nLength)
+//generates random string in the format capital letter first, then lower letters only
+std::string RandomGenerator::GenerateRandomString(int nLength)
 {
-	string strName;
+	std::string strName;
 
 	strName.resize(nLength);
 
+	//the first symbol will be capital letter
 	strName[0] = GenerateRandomChar(true);
 
 	for( int i = 1; i < nLength; i++)
@@ -49,6 +51,7 @@ int RandomGenerator::GenerateRandomNumber(int nUpperRange)
 {
 	int nNumber = rand() % nUpperRange;
 	
+	//always return numbers greater than zero
 	return nNumber+1;
 }
 
@@ -56,6 +59,7 @@ double RandomGenerator::GenerateRandomSignedNumber(int nUpperRange)
 {
 	int nNumber = rand() % nUpperRange;
 
+	//adds additional randomization. if nNumber is even make it negative.
 	if( nNumber % 2 == 0 )
 	{
 		nNumber = -nNumber;
@@ -73,10 +77,10 @@ int RandomGenerator::GenerateRandomNumberInRange(int nLowerRange, int nUpperRang
 
 RandomGenerator* RandomGenerator::GetRGen()
 {
-	if( rger == nullptr )
+	if( m_pRGen == nullptr )
 	{
-		rger  = new RandomGenerator;
+		m_pRGen  = new RandomGenerator;
 	}
 		
-	return rger;
+	return m_pRGen;
 }

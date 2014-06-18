@@ -21,7 +21,7 @@ Entity::Entity()
 	CalculateMass();
 }
 
-Entity::Entity(string name,double energy,double level,Point3D position)
+Entity::Entity(std::string name,double energy,double level,Point3D position)
 {
 	m_strName = name;
 	m_fEnergy = energy;
@@ -33,12 +33,12 @@ Entity::Entity(string name,double energy,double level,Point3D position)
 	CalculateMass();
 }
 
-string Entity::GetName()
+std::string Entity::GetName()
 {
 	return m_strName;
 }
 
-void Entity::SetName(string name)
+void Entity::SetName(std::string name)
 {
 	m_strName = name;
 }
@@ -128,7 +128,7 @@ void Entity::Attack(Entity& otherEntity)
 	otherEntity.ModifyEnergy(-damage);
 }
 
-void Entity::DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity)
+void Entity::DoAction(std::unique_ptr<Planet>& pPlanet,Entity& otherEntity)
 {
 	Attack(otherEntity);
 }

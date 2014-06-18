@@ -1,10 +1,6 @@
 #include<string>
-#include<time.h>
-#include <stdlib.h> 
 
 #pragma once
-
-using namespace std;
 
 class RandomGenerator
 {
@@ -12,7 +8,7 @@ public:
 
 	RandomGenerator();
 
-	string GenerateRandomString(int nLength);
+	std::string GenerateRandomString(int nLength);
 
 	double GenerateRandomSignedNumber(int nUpperRange);
 
@@ -26,6 +22,6 @@ public:
 
 private:
 
-	static RandomGenerator* rger;
+	static RandomGenerator* m_pRGen;
 };
 

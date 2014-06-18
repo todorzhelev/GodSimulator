@@ -3,12 +3,12 @@
 
 Scene* m_pScene = nullptr;
 
-std::vector<unique_ptr<Planet>>& Scene::GetPlanets()
+std::vector<std::unique_ptr<Planet>>& Scene::GetPlanets()
 {
 	return m_Planets;
 }
 
-unique_ptr<Planet>& Scene::GetPlanet(string strPlanetName)
+std::unique_ptr<Planet>& Scene::GetPlanet(std::string strPlanetName)
 {
 	for(auto& i : m_Planets )
 	{
@@ -18,11 +18,13 @@ unique_ptr<Planet>& Scene::GetPlanet(string strPlanetName)
 		}
 	}
 
-	return unique_ptr<Planet>(nullptr);
+	return std::unique_ptr<Planet>(nullptr);
 }
 
-unique_ptr<Entity> Scene::CreateEntity(EntityType type)
+std::unique_ptr<Entity> Scene::CreateEntity(EntityType type)
 {
+	using namespace std;
+
 	unique_ptr<Entity> pEntity;
 
 	switch( type )
@@ -43,6 +45,7 @@ unique_ptr<Entity> Scene::CreateEntity(EntityType type)
 			pEntity = move(pNewEntity);
 
 			break;
+
 		}
 
 		case EntityType::HumanType :
@@ -69,7 +72,7 @@ unique_ptr<Entity> Scene::CreateEntity(EntityType type)
 }
 
 //converts from string to EntityType
-EntityType Scene::ConvertEntityType(string type)
+EntityType Scene::ConvertEntityType(std::string type)
 {
 	EntityType convertedType;
 

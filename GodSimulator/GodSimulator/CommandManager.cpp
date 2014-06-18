@@ -8,8 +8,10 @@ CommandManager::CommandManager(God* pPlayer,Scene* pScene)
 }
 
 //parse the command by empty spaces
-vector<string> CommandManager::ParseCommand(string command)
+std::vector<std::string> CommandManager::ParseCommand(std::string command)
 {
+	using namespace std;
+
 	string temp;
 	stringstream ss(command); 
 
@@ -25,11 +27,13 @@ vector<string> CommandManager::ParseCommand(string command)
 	return parameters;
 }
 
-void CommandManager::ExecuteCommand(vector<string> command)
+void CommandManager::ExecuteCommand(std::vector<std::string> command)
 {
+	using namespace std;
+
 	if( command.size() > 0 )
 	{
-		if( command.front().find("destroy") != std::string::npos )
+		if( command.front().find("destroy") != string::npos )
 		{
 			unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
 			if( pPlanet )
@@ -39,15 +43,15 @@ void CommandManager::ExecuteCommand(vector<string> command)
 				cout << "Population destroyed!" << endl << endl;
 			}
 		}
-		else if( command.front().find("list") != std::string::npos)
+		else if( command.front().find("list") != string::npos)
 		{
 			for( auto& i : m_pScene->GetPlanets() )
 			{
-				cout << "Planet " << i->GetName() <<" with " << i->m_vEntities.size() << " population" << endl;
+				cout << "Planet " << i->GetName() <<" with " << i->GetEntities().size() << " population" << endl;
 			}
 			cout << endl << endl;
 		}
-		else if( command.front().find("add") != std::string::npos)
+		else if( command.front().find("add") != string::npos)
 		{
 			unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
 			EntityType type = m_pScene->ConvertEntityType(command[2]);
@@ -60,12 +64,12 @@ void CommandManager::ExecuteCommand(vector<string> command)
 				cout << "Entities successfuly added!" << endl << endl;
 			}
 		}
-		else if( command.front().find("create") != std::string::npos)
+		else if( command.front().find("create") != string::npos)
 		{
 			m_pPlayer->CreatePlanet();
 			cout << "Planet successfuly created!" << endl << endl;
 		}
-		else if( command.front().find("exit") != std::string::npos)
+		else if( command.front().find("exit") != string::npos)
 		{
 			exit(0);
 		}
@@ -74,7 +78,7 @@ void CommandManager::ExecuteCommand(vector<string> command)
 	m_vLastCommand.clear();
 }
 
-vector<string>& CommandManager::GetLastCommand()
+std::vector<std::string>& CommandManager::GetLastCommand()
 {
 	return m_vLastCommand;
 }

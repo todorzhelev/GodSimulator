@@ -3,9 +3,6 @@
 
 Human::Human()
 {
-
-
-
 }
 
 void Human::Analyze()
@@ -20,12 +17,12 @@ void Human::Attack(Entity& otherEntity)
 	otherEntity.ModifyEnergy(-damage);
 }
 
-void Human::Mate(unique_ptr<Planet>& pPlanet)
+void Human::Mate(std::unique_ptr<Planet>& pPlanet)
 {
-	pPlanet->m_EntitiesToBeAdded[EntityType::HumanType]++;
+	pPlanet->GetEntitiesToBeAdded()[EntityType::HumanType]++;
 }
 
-void Human::DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity)
+void Human::DoAction(std::unique_ptr<Planet>& pPlanet,Entity& otherEntity)
 {
 	int number = RandomGenerator::GetRGen()->GenerateRandomNumber(6);
 	switch(number)

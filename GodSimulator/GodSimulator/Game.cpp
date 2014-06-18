@@ -6,27 +6,27 @@ Game::Game()
 
 	m_pScene = new Scene;
 
-	pPlayer = new God;
+	m_pPlayer = new God;
 
 	m_pPhysics = new Physics;
 
-	m_pCommandManager = new CommandManager(pPlayer,m_pScene);
+	m_pCommandManager = new CommandManager(m_pPlayer,m_pScene);
 }
 
 void Game::Run()
 {
-	unique_ptr<Planet> pPlanet(new Planet);
+	using namespace std;
+
+	unique_ptr<Planet> pPlanet(new Planet());
 
 	m_pScene->GetPlanets().push_back(move(pPlanet));
 
-	pPlayer->AddEntities(*(m_pScene->GetPlanets().front()),EntityType::HumanType,200);
+	m_pPlayer->AddEntities(*(m_pScene->GetPlanets().front()),EntityType::HumanType,200);
 
-	map<string,string> closeEntities;
-
-	cout << "Hello, God " << pPlayer->GetName() << endl;
+	cout << "Hello, God " << m_pPlayer->GetName() << endl;
 
 	//the thread will be immediately started after next line
-	std::thread ParallelThread(&Game::GetCommand,this);
+	std::thread PlayerInputThread(&Game::GetCommand,this);
 
 	while(true)
 	{
@@ -39,7 +39,7 @@ void Game::Run()
 		Update();
 	}
 
-	ParallelThread.join();
+	PlayerInputThread.join();
 	
 }
 
@@ -55,8 +55,8 @@ void Game::GetCommand()
 
 			PrintOptions();
 
-			string command;
-			getline(cin,command);
+			std::string command;
+			getline(std::cin,command);
 
 			m_pCommandManager->ParseCommand(command);
 		
@@ -68,6 +68,8 @@ void Game::GetCommand()
 
 void Game::PrintOptions()
 {
+	using namespace std;
+
 	cout << "You can choose on of the following options:" << endl;
 	cout << "Type \"destroy (planet name)\" to destroy planet's population" << endl;
 	cout << "Type \"list\" to print the current available planets with their population" << endl;
@@ -82,36 +84,37 @@ void Game::Update()
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		//lambda function to test the entity energy
-		auto func = [](unique_ptr<Entity>& ent){return ent->GetEnergy() < 0;};
+		auto func = [](std::unique_ptr<Entity>& ent){return ent->GetEnergy() < 0;};
 
 		//all entities that have their energy below zero are moved at the end of the array with remove_if function.
 		//then they are all erased with the erase function
-		i->m_vEntities.erase(remove_if(i->m_vEntities.begin(), i->m_vEntities.end(),func),
-							 i->m_vEntities.end());
+		i->GetEntities().erase(remove_if(i->GetEntities().begin(), i->GetEntities().end(),func),
+							 i->GetEntities().end());
 
 		//add new entities
-		for( auto it = i->m_EntitiesToBeAdded.begin();it!=i->m_EntitiesToBeAdded.end();it++)
+		for( auto it = i->GetEntitiesToBeAdded().begin();it!=i->GetEntitiesToBeAdded().end();it++)
 		{
 			for( int j = 0; j < it->second;j++)
 			{
-				unique_ptr<Entity> pEntity = move(m_pScene->CreateEntity(it->first));
+				std::unique_ptr<Entity> pEntity = move(m_pScene->CreateEntity(it->first));
 
-				i->m_vEntities.push_back(move(pEntity));
+				i->GetEntities().push_back(std::move(pEntity));
 			}
 		}
 
-		i->m_EntitiesToBeAdded.clear();
+		i->GetEntitiesToBeAdded().clear();
 	}
 
 	//moves entites around
 	for( auto& i: m_pScene->GetPlanets() )
 	{
-		for(auto it = i->m_vEntities.begin(); it!= i->m_vEntities.end();it++)
+		for(auto it = i->GetEntities().begin(); it!= i->GetEntities().end();it++)
 		{
 				m_pPhysics->MoveEntity(*(*it));
 		}
 	}
 
+	//sort entities by the distance to (0,0,0)
 	for( auto& i: m_pScene->GetPlanets() )
 	{
 		i->SortEntities();
@@ -122,12 +125,12 @@ void Game::Update()
 	//to be close enough
 	for( auto& k: m_pScene->GetPlanets() )
 	{
-		for(auto it = k->m_vEntities.begin(); it!= k->m_vEntities.end();it++)
+		for(auto it = k->GetEntities().begin(); it!= k->GetEntities().end();it++)
 		{
 			auto nextEntity = it;
 			nextEntity++;
 
-			if( nextEntity != k->m_vEntities.end() && m_pPhysics->IsClose(*(*it),*(*nextEntity)) )
+			if( nextEntity != k->GetEntities().end() && m_pPhysics->IsClose(*(*it),*(*nextEntity)) )
 			{
 				(*it)->DoAction(k,*(*nextEntity));
 			}

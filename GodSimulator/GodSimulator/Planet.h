@@ -4,7 +4,7 @@
 #include<functional>
 #include<algorithm>
 
-using namespace placeholders;
+using namespace std::placeholders;
 
 #pragma once
 
@@ -16,10 +16,14 @@ public:
 
 	void SortEntities();
 
-	bool EntitesComparator(const unique_ptr<Entity>& ent1,const unique_ptr<Entity>& ent2);
+	bool EntitesComparator(const std::unique_ptr<Entity>& ent1,const std::unique_ptr<Entity>& ent2);
 
-public:
+	std::vector<std::unique_ptr<Entity>>& GetEntities();
 
-	vector<unique_ptr<Entity>> m_vEntities;
-	map<EntityType, int> m_EntitiesToBeAdded;
+	std::map<EntityType, int>& GetEntitiesToBeAdded();
+
+private:
+
+	std::vector<std::unique_ptr<Entity>> m_vEntities;
+	std::map<EntityType, int> m_EntitiesToBeAdded;
 };

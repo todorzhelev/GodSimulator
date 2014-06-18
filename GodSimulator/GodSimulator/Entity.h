@@ -3,7 +3,6 @@
 #include"Point3D.h"
 #include"RandomGenerator.h"
 #include<memory>
-using namespace std;
 
 #pragma once 
 
@@ -33,10 +32,10 @@ class Entity
 public:
 
 	Entity();
-	Entity(string name,double energy,double level,Point3D position);
+	Entity(std::string name,double energy,double level,Point3D position);
 
-	string GetName();
-	void SetName(string name);
+	std::string GetName();
+	void SetName(std::string name);
 
 	double GetEnergy();
 	void SetEnergy(double energy);
@@ -55,7 +54,7 @@ public:
 
 	void Attack(Entity& otherEntity);
 
-	virtual void DoAction(unique_ptr<Planet>& pPlanet,Entity& otherEntity);
+	virtual void DoAction(std::unique_ptr<Planet>& pPlanet,Entity& otherEntity);
 
 	void SetState(States state);
 	States GetState();
@@ -67,12 +66,12 @@ protected:
 	void CalculateSize();
 	void CalculateMass();
 
-	string m_strName;
-	double m_fEnergy;
-	double m_fSize;
-	double m_fMass;
-	int m_nLevel;
-	Point3D m_Position;
-	int m_nStrength;
-	States m_State;
+	std::string	 m_strName;
+	double		 m_fEnergy;
+	double		 m_fSize;
+	double		 m_fMass;
+	int			 m_nLevel;
+	Point3D		 m_Position;
+	int			 m_nStrength;
+	States		 m_State;
 };

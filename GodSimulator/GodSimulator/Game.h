@@ -26,7 +26,7 @@ private:
 
 	Physics* m_pPhysics;
 
-	God* pPlayer;
+	God* m_pPlayer;
 
 	CommandManager* m_pCommandManager;
 
