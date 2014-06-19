@@ -10,6 +10,7 @@ create random planet or add manually entities to a planet.
 
 Technical implementation
 ============
+The simulator is created with Visual Studio 2012.<br />
 Some c++11 features are used in the program, like lambda functions, algorithms, bind, smart pointers, etc.
 
 The program uses one additional thread - for the input from the player.
