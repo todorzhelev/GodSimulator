@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.7"/>
-<title>GodSimulator: C:/Repositories/GodSimulator/GodSimulator/GodSimulator/Scene.h Source File</title>
+<title>GodSimulator: Scene.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('_scene_8h_source.html','');});
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::vector&lt;std::unique_ptr&lt;Planet&gt;&gt;&amp; <a class="code" href="class_scene.html#ab2f342f3cec5c33ac98c47c8a4cb54fc">GetPlanets</a>();</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_planet.html">Planet</a>* <a class="code" href="class_scene.html#ac6824ea48c6e0c9e730693e85c821cf3">GetPlanet</a>(std::string strPlanetName);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::unique_ptr&lt;Planet&gt;&amp; <a class="code" href="class_scene.html#a65067f36cee31725accaa77ecc395da9">GetPlanet</a>(std::string strPlanetName);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::unique_ptr&lt;Entity&gt; <a class="code" href="class_scene.html#acbf906a3f79a77737806391d19f61169">CreateEntity</a>(<a class="code" href="_entity_8h.html#ad79a57ed3105eb60d991a1aeb4a9dc44">EntityType</a> type);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
@@ -135,7 +135,6 @@ $(document).ready(function(){initNavTree('_scene_8h_source.html','');});
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_scene.html">Scene</a>* <a class="code" href="_scene_8h.html#a9e9bb4f6d2bbb73acd9702aeadbc04b5">m_pScene</a>;</div>
-<div class="ttc" id="class_planet_html"><div class="ttname"><a href="class_planet.html">Planet</a></div><div class="ttdef"><b>Definition:</b> Planet.h:11</div></div>
 <div class="ttc" id="_animal_8h_html"><div class="ttname"><a href="_animal_8h.html">Animal.h</a></div></div>
 <div class="ttc" id="class_scene_html_ad74724eea4d70e32cf64ca2eb39abcb8"><div class="ttname"><a href="class_scene.html#ad74724eea4d70e32cf64ca2eb39abcb8">Scene::ConvertEntityType</a></div><div class="ttdeci">EntityType ConvertEntityType(std::string type)</div><div class="ttdef"><b>Definition:</b> Scene.cpp:75</div></div>
 <div class="ttc" id="class_scene_html_acbf906a3f79a77737806391d19f61169"><div class="ttname"><a href="class_scene.html#acbf906a3f79a77737806391d19f61169">Scene::CreateEntity</a></div><div class="ttdeci">std::unique_ptr&lt; Entity &gt; CreateEntity(EntityType type)</div><div class="ttdef"><b>Definition:</b> Scene.cpp:24</div></div>
@@ -144,7 +143,7 @@ $(document).ready(function(){initNavTree('_scene_8h_source.html','');});
 <div class="ttc" id="class_scene_html_ab2f342f3cec5c33ac98c47c8a4cb54fc"><div class="ttname"><a href="class_scene.html#ab2f342f3cec5c33ac98c47c8a4cb54fc">Scene::GetPlanets</a></div><div class="ttdeci">std::vector&lt; std::unique_ptr&lt; Planet &gt; &gt; &amp; GetPlanets()</div><div class="ttdef"><b>Definition:</b> Scene.cpp:6</div></div>
 <div class="ttc" id="class_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:9</div></div>
 <div class="ttc" id="_human_8h_html"><div class="ttname"><a href="_human_8h.html">Human.h</a></div></div>
-<div class="ttc" id="class_scene_html_ac6824ea48c6e0c9e730693e85c821cf3"><div class="ttname"><a href="class_scene.html#ac6824ea48c6e0c9e730693e85c821cf3">Scene::GetPlanet</a></div><div class="ttdeci">Planet * GetPlanet(std::string strPlanetName)</div><div class="ttdef"><b>Definition:</b> Scene.cpp:11</div></div>
+<div class="ttc" id="class_scene_html_a65067f36cee31725accaa77ecc395da9"><div class="ttname"><a href="class_scene.html#a65067f36cee31725accaa77ecc395da9">Scene::GetPlanet</a></div><div class="ttdeci">std::unique_ptr&lt; Planet &gt; &amp; GetPlanet(std::string strPlanetName)</div><div class="ttdef"><b>Definition:</b> Scene.cpp:11</div></div>
 <div class="ttc" id="_planet_8h_html"><div class="ttname"><a href="_planet_8h.html">Planet.h</a></div></div>
 <div class="ttc" id="_scene_8h_html_a9e9bb4f6d2bbb73acd9702aeadbc04b5"><div class="ttname"><a href="_scene_8h.html#a9e9bb4f6d2bbb73acd9702aeadbc04b5">m_pScene</a></div><div class="ttdeci">Scene * m_pScene</div><div class="ttdef"><b>Definition:</b> Scene.cpp:4</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -152,8 +151,8 @@ $(document).ready(function(){initNavTree('_scene_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_985c9225a03fa99aee9895634bdcfa0a.html">GodSimulator</a></li><li class="navelem"><a class="el" href="_scene_8h.html">Scene.h</a></li>
-    <li class="footer">Generated on Thu Jun 19 2014 20:58:46 for GodSimulator by
+    <li class="navelem"><a class="el" href="_scene_8h.html">Scene.h</a></li>
+    <li class="footer">Generated on Thu Jun 19 2014 19:43:25 for GodSimulator by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>

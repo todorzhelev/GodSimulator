@@ -15,7 +15,7 @@ var searchData=
   ['getlastcommand',['GetLastCommand',['../class_command_manager.html#ad1082b330272e6fa890e343ab543f8c9',1,'CommandManager']]],
   ['getmass',['GetMass',['../class_entity.html#ac5b6e3ff15065bee97e33ddd9d7e6a60',1,'Entity']]],
   ['getname',['GetName',['../class_entity.html#a87d3f4fcf10297e08d86f69c627b26a9',1,'Entity']]],
-  ['getplanet',['GetPlanet',['../class_scene.html#ac6824ea48c6e0c9e730693e85c821cf3',1,'Scene']]],
+  ['getplanet',['GetPlanet',['../class_scene.html#a65067f36cee31725accaa77ecc395da9',1,'Scene']]],
   ['getplanets',['GetPlanets',['../class_scene.html#ab2f342f3cec5c33ac98c47c8a4cb54fc',1,'Scene']]],
   ['getposition',['GetPosition',['../class_entity.html#a3502741e124df8f0acc935e17c90d486',1,'Entity']]],
   ['getrgen',['GetRGen',['../class_random_generator.html#afee2bb942584267d2e07e85c7a94dbfd',1,'RandomGenerator']]],
