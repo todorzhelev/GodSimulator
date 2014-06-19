@@ -13,7 +13,7 @@ public:
 
 	std::vector<std::unique_ptr<Planet>>& GetPlanets();
 
-	std::unique_ptr<Planet>& GetPlanet(std::string strPlanetName);
+	Planet* GetPlanet(std::string strPlanetName);
 
 	std::unique_ptr<Entity> CreateEntity(EntityType type);
 

@@ -37,7 +37,7 @@ void CommandManager::ExecuteCommand(std::vector<std::string> command)
 		{
 			if( command.size() == 2 )
 			{
-				unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
+				Planet* pPlanet = m_pScene->GetPlanet(command[1]);
 				if( pPlanet )
 				{
 					m_pPlayer->DestroyEntirePopulation(*pPlanet);
@@ -66,7 +66,7 @@ void CommandManager::ExecuteCommand(std::vector<std::string> command)
 		{
 			if( command.size() == 4 )
 			{
-				unique_ptr<Planet>& pPlanet = m_pScene->GetPlanet(command[1]);
+				Planet* pPlanet = m_pScene->GetPlanet(command[1]);
 				EntityType type = m_pScene->ConvertEntityType(command[2]);
 				if( type == EntityType::UnknownType )
 				{

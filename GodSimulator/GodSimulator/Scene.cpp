@@ -8,17 +8,17 @@ std::vector<std::unique_ptr<Planet>>& Scene::GetPlanets()
 	return m_Planets;
 }
 
-std::unique_ptr<Planet>& Scene::GetPlanet(std::string strPlanetName)
+ Planet* Scene::GetPlanet(std::string strPlanetName)
 {
 	for(auto& i : m_Planets )
 	{
 		if( !i->GetName().compare(strPlanetName) )
 		{
-			return i;
+			return i.get();
 		}
 	}
 
-	return std::unique_ptr<Planet>(nullptr);
+	return nullptr;
 }
 
 std::unique_ptr<Entity> Scene::CreateEntity(EntityType type)
