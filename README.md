@@ -30,3 +30,5 @@ around by a random amount. Also the names of the entities are chosen by random.(
 
 Up to 200 000 entities can be supported before the sumilator will start to respond slow on the commands by the player.
 The commands are typed by the player and then are parsed.
+
+Also documentation for the project is generated with Doxygen. It can be seen by opening index.html in the documentation folder.
