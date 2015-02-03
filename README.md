@@ -1,4 +1,4 @@
-GodSimulator
+GodSimulator 
 ============
 
 This program simulates a God, which has control over planets and entities on the planets.
